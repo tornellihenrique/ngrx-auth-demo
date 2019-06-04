@@ -1,9 +1,19 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>HOME</span>
-    <div fxFlex fxLayout fxLayoutAlign="end">
-      <button mat-button [routerLink]="['/login']" class="login">LOG-IN</button>
-      <button mat-button [routerLink]="['/signup']" class="signup">SIGN-UP</button>
-    </div>
+    <div *ngIf="isAuthenticated; then loged; else unloged;"></div>
+    <ng-template #loged>
+      <div fxFlex fxLayout fxLayoutAlign="end">
+        <span class="email">{{ user.email }}</span>
+        <button mat-button (click)="logout()">LOGOUT</button>
+      </div>
+    </ng-template>
+
+    <ng-template #unloged>
+      <div fxFlex fxLayout fxLayoutAlign="end">
+        <button mat-button [routerLink]="['/login']" class="login">LOGIN</button>
+        <button mat-button [routerLink]="['/signup']" class="signup">SIGNUP</button>
+      </div>
+    </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
