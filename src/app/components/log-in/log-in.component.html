@@ -1,0 +1,24 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="example-form" autocomplete="off" ngNativeValidate>
+      <mat-form-field class="example-full-width">
+        <input type="email" matInput placeholder="Email" [(ngModel)]="user.email" name="email" required
+          autocomplete="off">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="example-full-width">
+        <input type="password" matInput placeholder="Password" [(ngModel)]="user.password" name="password" required
+          autocomplete="off">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions class="d-flex">
+    <button mat-raised-button (click)="onSubmit()" color="primary">Submit</button>
+    <button mat-raised-button [routerLink]="['/signup']" color="secondary">Signup</button>
+    <span class="example-spacer"></span>
+    <button mat-raised-button [routerLink]="['/']" color="warn">Cancel</button>
+  </mat-card-actions>
+</mat-card>
