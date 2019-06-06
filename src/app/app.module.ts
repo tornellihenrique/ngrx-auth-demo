@@ -11,11 +11,11 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './store/effects/auth.effects';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './store/app.states';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import * as fromAuthReducers from './store/reducers/auth.reducers';
+import { AuthEffects } from './store/effects/auth.effects';
 
 @NgModule({
   declarations: [
@@ -25,12 +25,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     LogInComponent
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot({ auth: fromAuthReducers.reducer }),
     EffectsModule.forRoot([AuthEffects]),
     RouterModule.forRoot([
       { path: 'login', component: LogInComponent },

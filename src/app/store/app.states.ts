@@ -1,14 +1,14 @@
-import * as fromAuthReducers from './reducers/auth.reducers';
-import { Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+
+import { State } from './reducers/auth.reducers';
+import { createSelector } from '@ngrx/store';
 
 export interface AppState {
-    authState: fromAuthReducers.State;
+    auth: State;
 }
 
-export const reducers = {
-    auth: fromAuthReducers.reducer
-};
+export const selectAuth = (state: AppState) => state.auth;
 
-export const selectAuthState = createFeatureSelector<AppState>('auth');
+export const selectAuthErrorMessage = createSelector(
+    selectAuth,
+    (state: State) => state.authErrorMessage
+);

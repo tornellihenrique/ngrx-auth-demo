@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { Store, select } from '@ngrx/store';
-import { AppState, selectAuthState } from 'src/app/store/app.states';
 import { Signup } from 'src/app/store/actions/auth.actions';
 import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppState } from 'src/app/store/app.states';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,23 +14,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SignUpComponent implements OnInit {
 
   user: User = new User();
-  errorMessage: string | null;
-  getState$: Observable<any>;
 
   constructor(
-    private store: Store<AppState>,
-    private snackBar: MatSnackBar
-  ) {
-    this.getState$ = this.store.select(selectAuthState);
-  }
+    private snackBar: MatSnackBar,
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit(): void {
-    this.getState$
-      .subscribe(
-        state => {
-          this.errorMessage = state.errorMessage;
-        }
-      );
+
   }
 
   onSubmit(): void {
